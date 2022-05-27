@@ -56,13 +56,13 @@ class Palindrome
     end
 end
 
-is_valid_word? = false
-while is_valid_word? == false
+is_valid_word = false
+while is_valid_word == false
     puts "Ingresa una palabra"
     word = gets.chomp()
     
     if word.length > 0
-        is_valid_word? = true
+        is_valid_word = true
         Palindrome.new(word)
     end
 end

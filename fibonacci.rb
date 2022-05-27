@@ -1,22 +1,29 @@
+# Desarrolle un script para calcular la secuencia de fibonacci según un número ingresado
+# por entrada estándar, tomando este como el límite de la secuencia.
 require "ruby_jard"
 
 class Fibonacci
     def initialize(max_number)
-        puts "Inside Fibonacci class"
         @max_number = max_number
         @serie = [0,1]
-        # jard
         start_serie()
     end
 
     private
 
     def start_serie
-        while serie_is_equal_to_max_number?() === false || is_number_greater_than_max_number?() === false
-        # end_program('Limit reached') if serie_is_equal_to_max_number?()
-        # end_program('Entered number doesn\'t belong to Fibonacci sequence, limit exceeded') if is_number_greater_than_max_number?()
-            value = calc_new_value()
-            push_value_to_serie(value)
+        generate_serie = true
+        while generate_serie == true
+            serie_completed = serie_is_equal_to_max_number?()
+            serie_completed_greater = is_number_greater_than_max_number?()
+            if serie_completed == true || serie_completed_greater == true
+                end_program('Serie completed!') if serie_completed
+                end_program("Entered number doesn\'t belong to Fibonacci sequence, One sequence more generated after #{@max_number}.") if serie_completed_greater
+                generate_serie = false
+            else 
+                value = calc_new_value()
+                push_value_to_serie(value)
+            end
         end
     end
 
@@ -25,7 +32,6 @@ class Fibonacci
     end
 
     def calc_new_value
-        jard
         right_ind = 1
         sum = 0
         @serie.each_with_index do |left_val ,ind|
@@ -48,7 +54,13 @@ class Fibonacci
     end
 
     def end_program(cause)
-        puts "PROGRAMA TERMINADO !!!"
+        puts "*" * 50
+        puts "⚪ -> #{cause}"
+        puts "-" * 50
+        puts 'The Fibonacci serie is:'
+        puts "▶ #{@serie.inspect}"
+        puts "*" * 50
+        puts "🍔 Program Finished! 🤓"
     end
 end
 
